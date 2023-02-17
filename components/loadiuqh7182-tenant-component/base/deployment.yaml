@@ -1,0 +1,41 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  creationTimestamp: null
+  labels:
+    app.kubernetes.io/created-by: application-service
+    app.kubernetes.io/instance: loadiuqh7182-tenant-component
+    app.kubernetes.io/managed-by: kustomize
+    app.kubernetes.io/name: loadiuqh7182-tenant-component
+    app.kubernetes.io/part-of: loadiuqh7182-tenant-app
+  name: loadiuqh7182-tenant-component
+  namespace: loadiuqh7182-tenant
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: python-app
+      app.kubernetes.io/instance: loadiuqh7182-tenant-component
+  strategy: {}
+  template:
+    metadata:
+      creationTimestamp: null
+      labels:
+        app: python-app
+        app.kubernetes.io/instance: loadiuqh7182-tenant-component
+    spec:
+      containers:
+      - image: quay.io/stonesoup_perfscale/test-images:bbd243f2da0e42b1aaeccd8002bc2abb
+        name: my-python
+        ports:
+        - containerPort: 8081
+          name: http
+          protocol: TCP
+        resources:
+          limits:
+            cpu: 100m
+            memory: 100Mi
+          requests:
+            cpu: 10m
+            memory: 50Mi
+status: {}
